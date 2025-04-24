@@ -1,9 +1,28 @@
 @import "tailwindcss";
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
+} */
+
+.node-deceased circle {
+  fill: #d84315 !important; 
 }
+.node-attendee circle {
+  fill: #6a1b9a !important; 
+}
+.link-funeral {
+  stroke: #757575 !important; 
+}
+
+
+.br{
+  border:  1px solid #d84315;
+}
+.bg{
+  border:  1px solid green;
+}
+
 
 @theme inline {
   --color-background: var(--background);
