@@ -44,6 +44,8 @@ export async function GET(request, { params }) {
       data: treeData,
     });
   } catch (error) {
+    console.log("Error retrieving family tree:", error);
+    
     return NextResponse.json(
       { error: error.message || "Error retrieving family tree" },
       { status: 500 }

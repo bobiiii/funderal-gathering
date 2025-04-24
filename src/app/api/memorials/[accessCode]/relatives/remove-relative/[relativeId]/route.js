@@ -6,6 +6,15 @@ import { startDB } from "@/db/connect";
 export async function DELETE(request, { params }) {
   try {
     const { relativeId, accessCode } = await  params;
+    const { secret } = await request.json();
+    
+// Verify secret (compare with your stored secret)
+    if (secret !== process.env.RELATIVE_SECRET) {
+      return NextResponse.json(
+        { message: "Wrong secret code" },
+        { status: 400 }
+      );
+    }
     // Validation
     if (!relativeId ||  !accessCode) {
       return NextResponse.json(

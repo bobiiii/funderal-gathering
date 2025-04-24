@@ -18,11 +18,14 @@ export async function getMemorialData(accessCode) {
   }
 }
 
-export async function removerelative(accessCode, relativeId) {
+export async function removerelative(secretCode, accessCode, relativeId) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/memorials/${accessCode}/relatives/remove-relative/${relativeId}`,
     {
       method: "DELETE",
+      body: JSON.stringify({
+        secret: secretCode,
+      }),
     }
   );
 

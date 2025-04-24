@@ -14,6 +14,7 @@ export default async function page({ params }) {
   }
   
   const memorial = memorialData.data;
+  
 
   return (
     <MemorialComp 

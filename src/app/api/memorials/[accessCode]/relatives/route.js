@@ -12,12 +12,20 @@ export async function POST(request, { params }) {
       relation: formData.get("relation"),
       email: formData.get("email"),
       photo: formData.get("photo"),
+      secret: formData.get("secret"),
     };
 
     // Validation
     if (!relativeData.name || !relativeData.relation) {
       return NextResponse.json(
         { message: "Name and relation are required" },
+        { status: 400 }
+      );
+    }
+
+    if (!relativeData.secret || relativeData.secret !== process.env.RELATIVE_SECRET) {
+      return NextResponse.json(
+        { message: "Wrong secret code" },
         { status: 400 }
       );
     }

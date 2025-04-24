@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Home() {
-  const [accessCode, setAccessCode] = useState('');
+  const [accessCode, setAccessCode] = useState('3IW4MX');
   const router = useRouter();
 
   const handleViewMemorial = () => {

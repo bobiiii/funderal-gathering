@@ -5,9 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 import { removerelative } from '@/lib/apiCall';
 
-export default function RemoveRelativeComp({ memorialData, accessCode }) {
-    // console.log("memorialData  ", memorialData?.data);
-    
+export default function RemoveRelativeComp({accessCode, memorialData }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -16,14 +14,20 @@ export default function RemoveRelativeComp({ memorialData, accessCode }) {
   const handleDelete = async (relativeId) => {
     if (!window.confirm('Are you sure you want to remove this family member?')) return;
     
+    // Prompt for secret code
+    const secretCode = prompt('Please enter the secret code to confirm removal:');
+    if (!secretCode) {
+      setError('Deletion cancelled - secret code required');
+      return;
+    }
+
     setIsLoading(true);
     setDeletingId(relativeId);
     setError(null);
 
     try {
-      await removerelative(accessCode, relativeId); // Call the API to delete the relative
-
-      router.refresh(); // Refresh the page to show updated list
+      await removerelative(secretCode, accessCode, relativeId);
+      router.refresh();
     } catch (err) {
       setError(err.message);
     } finally {

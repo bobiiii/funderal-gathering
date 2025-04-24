@@ -11,6 +11,7 @@ export default function AddRelativeComp({ accessCode }) {
     name: '',
     relation: '',
     email: '',
+    secret: '',
     photo: null
   });
   const [preview, setPreview] = useState(null);
@@ -57,6 +58,7 @@ export default function AddRelativeComp({ accessCode }) {
       formDataToSend.append('relation', formData.relation);
       if (formData.email) formDataToSend.append('email', formData.email);
       if (formData.photo) formDataToSend.append('photo', formData.photo);
+      formDataToSend.append('secret', formData.secret);
 
       const response = await fetch(`/api/memorials/${accessCode}/relatives`, {
         method: 'POST',
@@ -174,6 +176,21 @@ export default function AddRelativeComp({ accessCode }) {
                 id="email"
                 name="email"
                 value={formData.email}
+                onChange={handleChange}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Secret Code 
+              </label>
+              <input
+                type="text"
+                id="secret"
+                name="secret"
+                value={formData.secret}
                 onChange={handleChange}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
